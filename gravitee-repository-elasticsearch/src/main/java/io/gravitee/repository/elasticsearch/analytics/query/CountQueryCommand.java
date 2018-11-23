@@ -29,7 +29,7 @@ import io.gravitee.repository.analytics.query.count.CountResponse;
  * @author Sebastien Devaux (Zenika)
  *
  */
-public class CountQueryCommand extends AstractElasticsearchQueryCommand<CountResponse> {
+public class CountQueryCommand extends AbstractElasticsearchQueryCommand<CountResponse> {
 
 	private final static String TEMPLATE = "count.ftl";
 

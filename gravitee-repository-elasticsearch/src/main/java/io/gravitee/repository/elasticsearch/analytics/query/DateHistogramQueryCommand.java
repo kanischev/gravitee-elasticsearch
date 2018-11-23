@@ -35,7 +35,7 @@ import java.util.*;
  * @author Sebastien Devaux (Zenika)
  *
  */
-public class DateHistogramQueryCommand extends AstractElasticsearchQueryCommand<DateHistogramResponse> {
+public class DateHistogramQueryCommand extends AbstractElasticsearchQueryCommand<DateHistogramResponse> {
 
 	private final static String TEMPLATE = "dateHistogram.ftl";
 	

@@ -43,7 +43,7 @@ import java.util.stream.Stream;
  * @author Sebastien Devaux (Zenika)
  *
  */
-public abstract class AstractElasticsearchQueryCommand<T extends Response> implements ElasticsearchQueryCommand<T> {
+public abstract class AbstractElasticsearchQueryCommand<T extends Response> implements ElasticsearchQueryCommand<T> {
 
 	/**
 	 * Logger.
@@ -120,6 +120,10 @@ public abstract class AstractElasticsearchQueryCommand<T extends Response> imple
 
 	String [] extractCluster(AbstractQuery<T> query) {
 		// Extract tenant(s) filtering
+		final Map<String, String> crossClusterMapping = configuration.getCrossClusterMapping();
+		if (crossClusterMapping == null) {
+			return null;
+		}
 		if (query != null && query.query() != null && query.query().filter() != null) {
 			String filter = query.query().filter();
 			int idx = filter.indexOf(TENANT_FIELD);
@@ -129,13 +133,13 @@ public abstract class AstractElasticsearchQueryCommand<T extends Response> imple
 				return Stream
 						.of(tenantQuery.split(" OR "))
 						.map(fieldValue ->
-								configuration.getCrossClusterMapping().get(fieldValue.substring(2, fieldValue.length() - 2)))
+								crossClusterMapping.get(fieldValue.substring(2, fieldValue.length() - 2)))
 						.toArray(String[]::new);
 
 			}
 
 		}
 
-		return null;
+		return new String[] {"*"};
 	}
 }

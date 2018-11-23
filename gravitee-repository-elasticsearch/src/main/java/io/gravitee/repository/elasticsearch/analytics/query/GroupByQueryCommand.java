@@ -34,7 +34,7 @@ import java.util.Iterator;
  * @author Guillaume Gillon
  *
  */
-public class GroupByQueryCommand extends AstractElasticsearchQueryCommand<GroupByResponse> {
+public class GroupByQueryCommand extends AbstractElasticsearchQueryCommand<GroupByResponse> {
 
 	private final static String TEMPLATE = "groupBy.ftl";
 
